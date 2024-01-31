@@ -1,0 +1,66 @@
+.budget-planner-component {
+  max-width: 1200px;
+  display: block;
+  margin: 10px auto;
+}
+.main-budget-panel {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+
+.mini-component {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 100px;
+  width: 1200px;
+  height: 300px;
+  border-radius: 33px;
+  background: #fff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+}
+
+input {
+  width: 100%;
+  border: none;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  background-color: rgb(223, 220, 220);
+}
+
+.expense-input {
+  width: 15px;
+  display: inline-flex;
+  text-align: centers;
+  margin: 0;
+}
+
+/* removing spin-btn */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.btn-edit {
+  height: 45.511px;
+  background-color: #3c8514;
+  padding: 5px 10px;
+  border: none;
+  color: white;
+  text-align: center;
+  opacity: 0.6;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-edit:hover {
+  opacity: 1;
+}
