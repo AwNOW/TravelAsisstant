@@ -12,17 +12,26 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.1.0",
     "@types/react": "^18.2.28",
+    "@types/react-datepicker": "^4.19.5",
     "@types/react-dom": "^18.2.13",
+    "@types/react-modal": "^3.16.3",
+    "@types/react-notifications-component": "^3.1.4",
     "@types/react-router-dom": "^5.3.3",
     "@types/redux-logger": "^3.0.10",
+    "formik": "^2.4.5",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.3",
     "react": "^18.2.0",
+    "react-datepicker": "^5.1.0",
     "react-dom": "^18.2.0",
+    "react-modal": "^3.16.1",
+    "react-notifications-component": "^4.0.1",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.21.3",
     "redux-logger": "^3.0.6",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "uuidv4": "^6.2.13",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.13",

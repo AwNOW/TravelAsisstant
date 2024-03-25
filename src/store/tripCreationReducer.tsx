@@ -1,13 +1,13 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 
 export interface Trip {
   id: string;
   startDate: number;
-  endtDate: number;
+  endDate: number;
   tripLocation: string;
 }
 
-const tripsAdapter = createEntityAdapter({
+export const tripsAdapter = createEntityAdapter({
   // Assume IDs are stored in a field other than `book.id`
   selectId: (trip: Trip) => trip.id,
 
@@ -20,8 +20,10 @@ export const tripsSlice = createSlice({
   name: "trips",
   initialState: tripsAdapter.getInitialState(),
   reducers: {
-    addTrip: tripsAdapter.addOne,
+    addTripAction: tripsAdapter.addOne,
+    editTripAction: tripsAdapter.upsertOne,
+    removeTripAction: tripsAdapter.removeOne
   },
 });
 
-export const { addTrip } = tripsSlice.actions;
+export const { addTripAction, editTripAction, removeTripAction} = tripsSlice.actions;

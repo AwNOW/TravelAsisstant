@@ -1,66 +1,30 @@
-
-import "./App.css";
+import S from "./App.module.css";
 import {
   Route,
   Routes,
-  Link,
   useLocation,
 } from "react-router-dom";
-import Costs from "./components/CostsComponent/Costs";
-import Trips from "./components/HomeComponent/Trips";
+import HomeTripsComponent from "./components/HomeTripsComponent/HomeTripsComponent";
+import SingleTripItineraryComponent from "./components/SingleTripItineraryComponent/SingleTripItineraryComponent";
+import Budget from "./components/BudgetComponent/BudgetComponent";
 
-function App() {
+export function App() {
 
-  const location = useLocation();
   return (
     <>
-      <div className="appHeader}">
-        <div className="title">Your Personal Travel Assistant</div>
+      <div className={S.appHeader}>
+        <header className={S.title}>Your Personal Travel Assistant</header>
       </div>
 
-      <nav className="main-menu">
-        <Link
-          to=""
-          className={`menu-list-item ${
-            location.pathname === "/" ? "active" : ""
-          }`}
-        >
-          ADVENTURES
-        </Link>
-        <Link
-          to="itinerary"
-          className={`menu-list-item ${
-            location.pathname === "/itinerary" ? "active" : ""
-          }`}
-        >
-          ITINERARY
-        </Link>
-        <Link
-          to="budget"
-          className={`menu-list-item ${
-            location.pathname === "/budget" ? "active" : ""
-          }`}
-        >
-          BUDGET
-        </Link>
-        <Link
-          to="checklists"
-          className={`menu-list-item ${
-            location.pathname === "/checklists" ? "active" : ""
-          }`}
-        >
-          CHECKLISTS
-        </Link>
-      </nav>
-
       <Routes>
-        <Route path="/" element={<Trips />} />
-        <Route path="/itinerary" element={<div>Itinerary</div>} />
-        <Route path="/budget" element={<Costs />} />
-        <Route path="/checklists" element={<div>Checklist</div>} />
+        <Route path="/" element={<HomeTripsComponent />} />
+        <Route path={"/itinerary/:tripId"} element={<SingleTripItineraryComponent />}/>
+        <Route path={"/budget/:tripId"} element={<Budget/>} />
+        <Route path={"/checklists/:tripId"} element={<div>checklists</div>} />
+        <Route path="*" element={<div>dupa</div>} />
       </Routes>
     </>
   )
 }
 
-export default App
+export default App;

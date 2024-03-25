@@ -1,0 +1,28 @@
+.appHeader {
+  display: flex;
+  align-items: center;
+  background-color: #f7f7f7;
+  height: 200px;
+  color: white;
+}
+
+.title {
+  display: flex;
+  text-align: left;
+  margin-left: 150px;
+  width: 300px;
+  height: 100px;
+  color: #1EA585;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+
+@media only screen and (max-width: 900px) {
+  .title {
+    width: 250px;
+    font-size: 26px;
+  }
+}

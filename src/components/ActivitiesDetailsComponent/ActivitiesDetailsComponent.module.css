@@ -1,0 +1,93 @@
+.daysList {
+  width: 750px;
+  display: block;
+  list-style-type: none;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+.dateComp {
+  padding: 10px;
+  background-color: #dbeae7;
+}
+
+.activityDetailsComp {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid #dbeae7;
+}
+
+.initialItemText{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: row;
+    color: #cad0d0;
+}
+.timeComp {
+  margin-left: 30px;
+  margin-right: 20px;
+  flex-basis: 90px;
+  display: flex;
+  font-size: 14px;
+  justify-content: center;
+}
+.groupComp {
+  margin-right: 30px;
+  color: rgb(21, 120, 25);
+  font-weight: bold;
+}
+
+.textComp {
+  padding: 0px;
+  width: 405px;
+  margin-right: 30px;
+}
+
+.location {
+  display: flex;
+  color: #4cad9a;
+  font-size: 18px;
+  font-weight: 600;
+}
+.additionalInfoText {
+  overflow-wrap: break-word;
+  max-width: 415px;
+  font-size: 14px;
+  color: #727575;
+}
+
+.detailsCompButtons {
+  padding-top: 0px;
+  margin-right: 30px;
+
+}
+
+.btnEdit {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10px;
+  width: 25px;
+  padding: 12px 30px 12px 30px;
+  background-color: #fff;
+  border: 1px solid #1ea585;
+  border-radius: 4px;
+  color: #1ea585;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+  bottom: 0;
+  right: 0;
+}
+
+.btnEdit:hover{
+  background-color: #f8f6f6;
+}

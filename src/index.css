@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&subset=devanagari,latin-ext");
+@import url("react-datepicker/dist/react-datepicker.min.css");
+@import url("react-notifications-component/dist/theme.css");
+
 body {
   margin: 0;
   font-family: medium-content-sans-serif-font, -apple-system, BlinkMacSystemFont,
@@ -8,4 +12,31 @@ body {
   display: block;
   font-family: "Poppins";
   margin: auto;
+}
+
+
+a {
+  padding-left: 0px;
+  padding-right: 0px;
+  font-size: 16px;
+  text-decoration: none;
+  color: #020202;
+}
+
+form {
+  margin-top: 0;
+}
+
+input {
+  width: 100%;
+  border: none;
+  box-sizing: border-box;
+}
+
+
+/* removing spin-btn */
+s input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
