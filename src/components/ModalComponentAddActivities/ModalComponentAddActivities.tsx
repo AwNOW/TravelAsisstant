@@ -71,7 +71,7 @@ function ModalComponent({
       .min(new Date(), "Date cannot be in the past")
       .max(
         new Date(endTripDate + 86400000),
-        "Date cannot be after the end of the trip"
+        "Chosen date cannot be after the end of the trip."
       )
       .typeError("Please provide a valid date")
       .test(
@@ -89,7 +89,7 @@ function ModalComponent({
       .min(Yup.ref("startActivityDate"), "Incorrect date")
       .max(
         new Date(endTripDate + 86400000),
-        "Date cannot be after the end of the trip"
+        "Chosen date cannot be after the end of the trip."
       )
       .test(
         "date-range",
@@ -108,22 +108,24 @@ function ModalComponent({
   );
 
   const isOverlapping = (
-    NewStartActivityDate: Date,
-    NewEndActivityDate: Date
+    newStartActivityDate: Date,
+    newEndActivityDate: Date,
   ) => {
     return activitiesByTripId.some((activity) => {
+
+
       const activityStart = new Date(activity.startActivityDate);
       const activityEnd = new Date(activity.endActivityDate);
 
       return (
-        (NewStartActivityDate >= activityStart &&
-          NewStartActivityDate <= activityEnd) ||
-        (NewEndActivityDate >= activityStart &&
-          NewEndActivityDate <= activityEnd) ||
-        (activityStart >= NewStartActivityDate &&
-          activityStart <= NewEndActivityDate) ||
-        (activityEnd >= NewStartActivityDate &&
-          activityEnd <= NewEndActivityDate)
+        (newStartActivityDate >= activityStart &&
+          newStartActivityDate <= activityEnd) ||
+        (newEndActivityDate >= activityStart &&
+          newEndActivityDate <= activityEnd) ||
+        (activityStart >= newStartActivityDate &&
+          activityStart <= newEndActivityDate) ||
+        (activityEnd >= newStartActivityDate &&
+          activityEnd <= newEndActivityDate)
       );
     });
   };

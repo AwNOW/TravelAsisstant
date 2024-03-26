@@ -13,7 +13,6 @@ import {
 import {
   notificationActivityRemoved,
   notificationActivityEdited,
-  notificationActivityEditionNoChanges,
 } from "../../notifications";
 import { Formik, Field, ErrorMessage, FormikHelpers, Form } from "formik";
 import * as Yup from "yup";
@@ -42,6 +41,8 @@ Modal.setAppElement("#root");
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  startTripDate: number;
+  endTripDate: number;
   activityId: string | undefined;
   tripId: string | undefined;
   activityLocation: string | undefined;
@@ -63,6 +64,8 @@ interface EditActivitiesForm {
 function ModalComponent({
   isOpen,
   onClose,
+  startTripDate,
+  endTripDate,
   activityId,
   tripId,
   startActivityDate,
@@ -73,66 +76,34 @@ function ModalComponent({
 }: ModalProps) {
   const dispatch = useDispatch();
 
-  const validationSchema = Yup.object().shape({
-    city: Yup.string().required("City is required"),
-    description: Yup.string()
-      .required("Description is required")
-      .max(50, "Cannot be longer than 50 characters"),
-    group: Yup.string().required("Type is required"),
-    startActivityDate: Yup.date()
-      .required("Start date is required")
-      .min(new Date(), "Date cannot be in the past")
-      .max(
-        new Date(),
-        "Date cannot be after the end of the trip"
-      )
-      .typeError('Please provide a valid date')
-      .test(
-        "date-range",
-        "Activity date range overlaps with existing activities",
-        function (startActivityDate:Date) {
-          const endActivityDate = this.resolve(Yup.ref('startActivityDate')) as Date;
-          return !isOverlapping(startActivityDate, endActivityDate);
-        }
-      ),
-    endActivityDate: Yup.date()
-      .required("Start date is required")
-      .min(Yup.ref("startActivityDate"), "Incorrect date")
-      .max(
-        new Date(86400000),
-        "Date cannot be after the end of the trip"
-      )
-      .test(
-        "date-range",
-        "Activity date range overlaps with existing activities",
-        function (endActivityDate:Date) {
-          const startActivityDate = this.resolve(Yup.ref('startActivityDate')) as Date;
-          return !isOverlapping(startActivityDate, endActivityDate);
-        }
-      ),
-  });
-
   const activitiesByTripId = useSelector<StoreState, Activity[]>((state) =>
     getActivitiesByTripId(state, tripId!)
   );
 
-  const isOverlapping = (
-    NewStartActivityDate: Date,
-    NewEndActivityDate: Date
+  const isOverlappingOtherActivity = (
+    newStartActivityDate: Date,
+    newEndActivityDate: Date,
+    currentActivityId: string,
   ) => {
     return activitiesByTripId.some((activity) => {
+
+      if (activity.id === currentActivityId) {
+        console.log(activity.id)
+        return false;
+      }
+
       const activityStart = new Date(activity.startActivityDate);
       const activityEnd = new Date(activity.endActivityDate);
 
       return (
-        (NewStartActivityDate >= activityStart &&
-          NewStartActivityDate <= activityEnd) ||
-        (NewEndActivityDate >= activityStart &&
-          NewEndActivityDate <= activityEnd) ||
-        (activityStart >= NewStartActivityDate &&
-          activityStart <= NewEndActivityDate) ||
-        (activityEnd >= NewStartActivityDate &&
-          activityEnd <= NewEndActivityDate)
+        (newStartActivityDate >= activityStart &&
+          newStartActivityDate <= activityEnd) ||
+        (newEndActivityDate >= activityStart &&
+          newEndActivityDate <= activityEnd) ||
+        (activityStart >= newStartActivityDate &&
+          activityStart <= newEndActivityDate) ||
+        (activityEnd >= newStartActivityDate &&
+          activityEnd <= newEndActivityDate)
       );
     });
   };
@@ -160,7 +131,7 @@ function ModalComponent({
         })
       );
     }
-
+    notificationActivityEdited();
     setSubmitting(false);
     onClose(); // Close the modal after dispatching action
   };
@@ -173,6 +144,53 @@ function ModalComponent({
     }
   };
 
+  const validationSchema = Yup.object().shape({
+    city: Yup.string().required("City is required"),
+    description: Yup.string()
+      .required("Description is required")
+      .max(50, "Cannot be longer than 50 characters"),
+    group: Yup.string().required("Type is required"),
+    startActivityDate: Yup.date()
+      .required("Start date is required")
+      .min(new Date(), "Date cannot be in the past")
+      .min(new Date(startTripDate), "Date cannot be in the past")
+      .max(
+        new Date(endTripDate + 86400000),
+        "Chosen date cannot be after the end of the trip."
+      )
+      .typeError("Please provide a valid date")
+      .test(
+        "date-range",
+        "Activity date range overlaps with existing activities",
+        function (startActivityDate: Date) {
+          const endActivityDate = this.resolve(
+            Yup.ref("startActivityDate")
+          ) as Date;
+          return !isOverlappingOtherActivity(startActivityDate, endActivityDate, activityId!);
+        }
+      ),
+    endActivityDate: Yup.date().when("endDateIsRequired", {
+      is: true,
+      then: () => Yup.date()
+        .required("End date is required")
+        .min(Yup.ref("startActivityDate"), "End date must be after start date")
+        .max(
+          new Date(endTripDate + 86400000),
+          "End date cannot be after the end of the trip."
+        )
+        .typeError("Please provide a valid date")
+        .test(
+          "date-range",
+          "Activity date range overlaps with existing activities",
+          function (endActivityDate: Date) {
+            const startActivityDate = this.resolve(
+              Yup.ref("startActivityDate")
+            ) as Date;
+            return !isOverlappingOtherActivity(startActivityDate, endActivityDate, activityId!);
+          }
+        ),
+    }),
+  });
   return (
     <div>
       <Modal
@@ -330,7 +348,7 @@ function ModalComponent({
               >
                 DELETE ACTIVITY
               </button>
-              <button type="submit" className={S.btnAddNew} disabled={!isValid}>
+              <button type="submit" className={S.btnAddNew}>
                 UPDATE
               </button>
             </Form>

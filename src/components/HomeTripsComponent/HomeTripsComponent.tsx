@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { notificationSuccessfulTripCreation } from "../../notifications";
 
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
@@ -70,6 +70,7 @@ function HomeTripsComponent() {
     }
   }, [searchCountry, showAutocomplete]);
 
+  // hide on window click autocomplete list
   useEffect(() => {
     const fn = () => {
       setShowAutocomplete(false);
@@ -84,6 +85,7 @@ function HomeTripsComponent() {
     // ID creation
     const newId = uuidv4();
 
+    //location validation
     if (searchCountry.length === 0) {
       setLocationErrorMessage(true);
       return;

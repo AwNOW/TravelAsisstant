@@ -109,6 +109,8 @@ function ActivitiesDetailsComponent({
           setEditedActivity(undefined);
         }}
         isOpen={!!editedActivity}
+        startTripDate={startTripDate}
+        endTripDate={endTripDate}
         activityId={editedActivity?.id}
         tripId={editedActivity?.tripId}
         activityLocation={editedActivity?.city}
