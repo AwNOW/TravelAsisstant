@@ -12,11 +12,12 @@ import ModalComponent from "../ModalComponentAddActivities/ModalComponentAddActi
 import NavigationComponent from "../NavigationComponent/NavigationComponent";
 import ActivitiesDetailsComponent from "../ActivitiesDetailsComponent/ActivitiesDetailsComponent";
 
-type Params = {
+export type Params = {
   tripId: string;
 };
 
 function SingleTripItineraryComponent() {
+
   const tripId = useParams<Params>().tripId!;
   const selectedTrip = useAppSelector((state) =>
     tripsSelectors.selectById(state, tripId)

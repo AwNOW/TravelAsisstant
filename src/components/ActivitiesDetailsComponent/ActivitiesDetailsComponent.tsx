@@ -4,8 +4,8 @@ import { StoreState } from "../../store/selectors";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
-import { Trip } from "../../store/tripCreationReducer";
-import { Activity } from "../../store/activitiesReducer";
+
+import { Activity } from "../../store/activityReducer";
 import ModalComponent from "../ModalComponentEditActivity/ModalComponentEditActivity";
 
 interface ActivitiesDetailsComponentProps {

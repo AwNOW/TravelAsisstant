@@ -1,0 +1,21 @@
+.btnAddNew {
+  width: 300px;
+  height: 40px;
+  padding: 12px 35px 12px 35px;
+  background-color: #1ea585;
+  border: none;
+  border-radius: 13px;
+  color: white;
+  text-align: center;
+  opacity: 0.8;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: 28px;
+  margin-bottom: 28px;
+}
+
+.btnAddNew:disabled {
+  background-color: dimgrey;
+}

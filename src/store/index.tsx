@@ -7,10 +7,12 @@ import {
   StoreEnhancer,
   Reducer,
 } from "redux";
-import { tripsSlice, tripsAdapter } from "./tripCreationReducer";
-import { activitiesSlice, activitiesAdapter } from "./activitiesReducer";
+import { tripsSlice } from "./tripReducer";
+import { activitiesSlice } from "./activityReducer";
+import { expensesSlice } from "./expenseReducer";
+import { expensesCategoriesSlice } from "./expenseCategoryReducer";
+import { budgetSlice } from "./totalBugdetReducer";
 import reduxLogger from "redux-logger";
-
 
 // `combineReducers` combines all the reducer functions into one big reducer
 // function, which is typically called `rootReducer`. This is the most important
@@ -19,6 +21,9 @@ import reduxLogger from "redux-logger";
 export const rootReducer = combineReducers({
   trips: tripsSlice.reducer,
   activities: activitiesSlice.reducer,
+  budget: budgetSlice.reducer,
+  expenses: expensesSlice.reducer,
+  expenseCategory: expensesCategoriesSlice.reducer,
 });
 
 // `enhancer` allows you to alter the store and add functionality such as the
@@ -30,7 +35,7 @@ if (process.env.NODE_ENV !== "production") {
     (window as any)._REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   // Include thunk in applyMiddleware
   enhancer = composeEnhancers(applyMiddleware(reduxLogger));
-}  else {
+} else {
   // In production, only include thunk middleware
   enhancer = applyMiddleware();
 }
@@ -48,6 +53,5 @@ const configureStore = (preloadedState?: any): Store => {
 
   return store;
 };
-
 
 export default configureStore;

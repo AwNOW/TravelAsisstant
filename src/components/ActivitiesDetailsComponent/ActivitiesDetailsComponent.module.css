@@ -1,7 +1,7 @@
 .daysList {
-  width: 750px;
   display: block;
   list-style-type: none;
+  width: 750px;
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
@@ -10,84 +10,87 @@
 }
 
 .dateComp {
-  padding: 10px;
   background-color: #dbeae7;
+  padding: 10px;
 }
 
 .activityDetailsComp {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  border-top: 1px solid #dbeae7;
   display: flex;
   flex-direction: row;
-  border-top: 1px solid #dbeae7;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
-.initialItemText{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 30px;
-    display: flex;
-    flex-direction: row;
-    color: #cad0d0;
-}
-.timeComp {
-  margin-left: 30px;
-  margin-right: 20px;
-  flex-basis: 90px;
+.initialItemText {
+  color: #cad0d0;
   display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
+.timeComp {
+  display: flex;
+  flex-basis: 90px;
   font-size: 14px;
   justify-content: center;
+  margin-left: 30px;
+  margin-right: 20px;
 }
+
 .groupComp {
-  margin-right: 30px;
   color: rgb(21, 120, 25);
   font-weight: bold;
+  margin-right: 30px;
 }
 
 .textComp {
+  margin-right: 30px;
   padding: 0px;
   width: 405px;
-  margin-right: 30px;
 }
 
 .location {
-  display: flex;
   color: #4cad9a;
+  display: flex;
   font-size: 18px;
   font-weight: 600;
 }
+
 .additionalInfoText {
-  overflow-wrap: break-word;
-  max-width: 415px;
-  font-size: 14px;
   color: #727575;
+  font-size: 14px;
+  max-width: 415px;
+  overflow-wrap: break-word;
 }
 
 .detailsCompButtons {
-  padding-top: 0px;
   margin-right: 30px;
-
+  padding-top: 0px;
 }
 
 .btnEdit {
-  margin-top: 5px;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 10px;
-  width: 25px;
-  padding: 12px 30px 12px 30px;
   background-color: #fff;
   border: 1px solid #1ea585;
   border-radius: 4px;
+  bottom: 0;
+  cursor: pointer;
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  margin-top: 5px;
+  padding: 12px 30px 12px 30px;
+  right: 0;
+  text-decoration: none;
   color: #1ea585;
   transition: 0.3s;
-  text-decoration: none;
-  cursor: pointer;
-  bottom: 0;
-  right: 0;
+  width: 25px;
 }
 
-.btnEdit:hover{
+.btnEdit:hover {
   background-color: #f8f6f6;
+  color: #1ea585;
 }

@@ -9,7 +9,7 @@ import {
   Activity,
   removeActivityAction,
   editActivityAction,
-} from "../../store/activitiesReducer";
+} from "../../store/activityReducer";
 import {
   notificationActivityRemoved,
   notificationActivityEdited,

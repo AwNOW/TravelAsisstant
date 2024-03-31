@@ -11,9 +11,9 @@ import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 
 import { tripsSelectors, useAppSelector } from "../../store/selectors";
-import { addTripAction } from "../../store/tripCreationReducer";
+import { addTripAction } from "../../store/tripReducer";
 import ModalComponent from "../ModalComponentEditTrip/ModalComponentEditTrip";
-import { Trip } from "../../store/tripCreationReducer";
+import { Trip } from "../../store/tripReducer";
 
 //helper fn convert date
 export const formatDate = (timestamp: number): string => {
@@ -122,7 +122,7 @@ function HomeTripsComponent() {
 
   // trip edition
   //modal
-  const [editedTrip, setEditedTrip] = useState<Trip | undefined>(undefined);
+  const [editedTrip, setEditedTripModal] = useState<Trip | undefined>(undefined);
 
   return (
     <div className={S.main}>
@@ -218,7 +218,7 @@ function HomeTripsComponent() {
                 className={S.btnEdit}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setEditedTrip(trip);
+                  setEditedTripModal(trip);
                 }}
               >
                 Edit
@@ -229,7 +229,7 @@ function HomeTripsComponent() {
       </ul>
       <ModalComponent
         onClose={() => {
-          setEditedTrip(undefined);
+          setEditedTripModal(undefined);
         }}
         isOpen={!!editedTrip}
         tripId={editedTrip?.id}

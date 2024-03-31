@@ -1,0 +1,130 @@
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.title {
+  color: #1ea585;
+  font-size: 28px;
+}
+.inputBox {
+  border: medium none !important;
+  margin: 15px 0 0 0px;
+  min-width: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+.label {
+  padding-right: 5px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.input {
+  width: 400px;
+  height: 45px;
+  display: inline-block;
+  padding: 0 16px 0 12px;
+  line-height: 30px;
+  border: 1px solid #dddbda;
+  border-radius: 4px;
+  background-color: #fff;
+  color: rgb(8, 7, 7);
+  transition: border 0.1s linear, background-color 0.1s linear;
+}
+
+input, select, textarea:focus{
+  outline: none;
+}
+
+.input:focus,
+.formTextarea:focus,
+.selectInput:focus {
+  border-color: #1ea585;
+  color: var(--sds-c-input-text-color-focus);
+  box-shadow: #1ea585 0px 0px 3px 0px;
+}
+
+.input:disabled {
+  background-color: rgb(198, 197, 197);
+}
+
+.selectInput {
+  width: 400px;
+  height: 45px;
+  display: inline-block;
+  padding: 0 16px 0 12px;
+  line-height: 30px;
+  border: 1px solid #dddbda;
+  border-radius: 4px;
+  background-color: #fff;
+  color: rgb(8, 7, 7);
+  transition: border 0.1s linear, background-color 0.1s linear;
+}
+
+.formTextarea {
+  width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background: #fff;
+  margin: 0 0 0;
+  padding: 10px;
+  height: 100px;
+  resize: none;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.checkboxInput{
+  width: auto;
+}
+
+.btnAddNew {
+  width: 300px;
+  height: 40px;
+  padding: 12px 35px 12px 35px;
+  background-color: #1ea585;
+  border: none;
+  border-radius: 13px;
+  color: white;
+  text-align: center;
+  opacity: 0.8;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-top: 28px;
+  margin-bottom: 28px;
+}
+
+.btnAddNew:disabled {
+  background-color: dimgrey;
+}
+
+.inputBox {
+  display: grid;
+  grid-column: 50% 50%;
+}
+.labelDate {
+  font-family: inherit;
+}
+
+
+.input-err {
+  border: 1px solid red;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}

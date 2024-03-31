@@ -9,14 +9,14 @@ import {
   notificationTripEditionNoChanges,
 } from "../../notifications";
 import { getActivitiesByTripId } from "../../store/selectors";
-import { Activity } from "../../store/activitiesReducer";
-import { removeActivitiesAction } from "../../store/activitiesReducer";
+import { Activity } from "../../store/activityReducer";
+import { removeActivitiesAction } from "../../store/activityReducer";
 
 import { StoreState } from "../../store/selectors";
 import {
   editTripAction,
   removeTripAction,
-} from "../../store/tripCreationReducer";
+} from "../../store/tripReducer";
 
 import {
   Formik,

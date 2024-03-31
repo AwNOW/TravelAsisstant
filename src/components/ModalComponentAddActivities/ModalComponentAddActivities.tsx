@@ -3,14 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 import Modal from "react-modal";
 import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
-import { addActivityAction } from "../../store/activitiesReducer";
+import { addActivityAction } from "../../store/activityReducer";
 import { StoreState } from "../../store/selectors";
 import { getActivitiesByTripId } from "../../store/selectors";
-import { Activity } from "../../store/activitiesReducer";
+import { Activity } from "../../store/activityReducer";
 import { notificationSuccessfulActivityCreation } from "../../notifications"
 import { Formik, Field, ErrorMessage, FormikHelpers, Form } from "formik";
 import * as Yup from "yup";
-import { error } from "console";
+
 
 const customStyles = {
   content: {
@@ -134,10 +134,10 @@ function ModalComponent({
     values: AddActivitiesForm,
     formikHelpers: FormikHelpers<AddActivitiesForm>
   ) => void | Promise<any> = (values, { setSubmitting }) => {
-    const newDestinationId = uuidv4();
+    const newActivityId = uuidv4();
     dispatch(
       addActivityAction({
-        id: newDestinationId,
+        id: newActivityId,
         tripId: tripId,
         startActivityDate: Number(values.startActivityDate),
         endActivityDate: Number(values.endActivityDate),

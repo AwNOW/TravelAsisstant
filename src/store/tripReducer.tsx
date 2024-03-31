@@ -1,4 +1,4 @@
-import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import {createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 
 export interface Trip {
   id: string;

@@ -1,0 +1,90 @@
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px auto;
+}
+
+.budgetSummary {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 800px;
+  margin-top: 50px;
+  padding: 30px;
+  border-radius: 13px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.btnAddNew {
+  width: 260px;
+  height: 40px;
+  padding: 12px 35px 12px 35px;
+  background-color: #1ea585;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  text-align: center;
+  opacity: 0.8;
+  transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 50px;
+}
+
+.btnAddNew:hover {
+  opacity: 1;
+}
+
+.btnEdit {
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #1ea585;
+  border-radius: 4px;
+  bottom: 0;
+  cursor: pointer;
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  margin-top: 5px;
+  padding: 12px 30px 12px 30px;
+  right: 0;
+  text-decoration: none;
+  color: #1ea585;
+  transition: 0.3s;
+  width: 25px;
+}
+
+.btnEdit:hover {
+  background-color: #f8f6f6;
+  color: #1ea585;
+}
+
+.mainLists {
+  padding-top: 40px;
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.costsList {
+  display: flex;
+  justify-content: start;
+  width: 450px;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.categoriesList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 200px;
+  padding: 0;
+}

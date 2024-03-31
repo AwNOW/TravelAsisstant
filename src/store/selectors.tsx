@@ -1,7 +1,8 @@
 import { rootReducer } from "./index";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import { tripsSlice, tripsAdapter } from "./tripCreationReducer";
-import { activitiesSlice, activitiesAdapter, Activity } from "./activitiesReducer";
+import { tripsAdapter } from "./tripReducer";
+import { activitiesAdapter } from "./activityReducer";
+import { budgetAdapter } from "./totalBugdetReducer";
 import { createSelector } from "@reduxjs/toolkit";
 
 export type StoreState = ReturnType<typeof rootReducer>;
@@ -12,6 +13,10 @@ export const tripsSelectors = tripsAdapter.getSelectors<StoreState>(
 
 export const activitiesSelectors = activitiesAdapter.getSelectors<StoreState>(
   (state) => state.activities
+);
+
+export const budgetSelectors = budgetAdapter.getSelectors<StoreState>(
+  (state) => state.budget
 );
 
 export const funkcjazMemo1 = createSelector(

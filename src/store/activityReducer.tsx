@@ -6,18 +6,18 @@ export interface Activity {
   startActivityDate: number;
   endActivityDate: number;
   city: string;
-  description: string | undefined;
+  description: string;
   isChecked: boolean;
   group: string;
 }
 
 export const activitiesAdapter = createEntityAdapter({
   selectId: (activity: Activity) => activity.id,
-  sortComparer: (a, b) => a.startActivityDate - b.endActivityDate,
+  sortComparer: (a, b) => a.startActivityDate - b.startActivityDate,
 });
 
 export const activitiesSlice = createSlice({
-  name: "destinations",
+  name: "acticvities",
   initialState: activitiesAdapter.getInitialState(),
   reducers: {
     addActivityAction: activitiesAdapter.addOne,
