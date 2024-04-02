@@ -5,6 +5,7 @@ export interface Trip {
   startDate: number;
   endDate: number;
   tripLocation: string;
+  budget: number;
 }
 
 export const tripsAdapter = createEntityAdapter({

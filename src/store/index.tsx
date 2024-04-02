@@ -11,7 +11,6 @@ import { tripsSlice } from "./tripReducer";
 import { activitiesSlice } from "./activityReducer";
 import { expensesSlice } from "./expenseReducer";
 import { expensesCategoriesSlice } from "./expenseCategoryReducer";
-import { budgetSlice } from "./totalBugdetReducer";
 import reduxLogger from "redux-logger";
 
 // `combineReducers` combines all the reducer functions into one big reducer
@@ -21,7 +20,6 @@ import reduxLogger from "redux-logger";
 export const rootReducer = combineReducers({
   trips: tripsSlice.reducer,
   activities: activitiesSlice.reducer,
-  budget: budgetSlice.reducer,
   expenses: expensesSlice.reducer,
   expenseCategory: expensesCategoriesSlice.reducer,
 });

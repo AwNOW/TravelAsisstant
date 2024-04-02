@@ -1,11 +1,12 @@
 import S from "./modalComponentAddTotalBudget.module.css";
-import { v4 as uuidv4 } from "uuid";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { StoreState } from "../../store/selectors";
-import { updateBudgetAction } from "../../store/totalBugdetReducer"
 import { Formik, Field, ErrorMessage, FormikHelpers, Form } from "formik";
+import CurrencyInput from 'react-currency-input-field';
 import * as Yup from "yup";
+
+import { editTripAction } from "../../store/tripReducer";
+import { useAppSelector, tripsSelectors } from "../../store/selectors";
 
 const customStyles = {
   content: {
@@ -49,16 +50,18 @@ function ModalComponent({ isOpen, onClose, tripId }: ModalProps) {
   //     group: Yup.string().required("Type is required"),
   //   });
 
+  const selectedTrip = useAppSelector((state) =>
+    tripsSelectors.selectById(state, tripId)
+  );
+
   const handleFormSubmit: (
     values: AddExpenseForm,
     formikHelpers: FormikHelpers<AddExpenseForm>
   ) => void | Promise<any> = (values, { setSubmitting }) => {
-    const newBudgetId = uuidv4();
     dispatch(
-        updateBudgetAction({
-        id: newBudgetId,
-        tripId: tripId,
-        totalAmount: values.totalAmount
+      editTripAction({
+        ...selectedTrip,
+        budget: Number(values.totalAmount),
       })
     );
     setSubmitting(false);
@@ -78,7 +81,7 @@ function ModalComponent({ isOpen, onClose, tripId }: ModalProps) {
 
         <Formik
           initialValues={{
-            totalAmount: 0,
+            totalAmount: selectedTrip.budget,
           }}
           //   validationSchema={validationSchema}
           onSubmit={handleFormSubmit}
@@ -97,7 +100,7 @@ function ModalComponent({ isOpen, onClose, tripId }: ModalProps) {
                   BUDGET
                 </label>
                 <Field
-                  type="text"
+                  type="number"
                   className={S.input}
                   placeholder=""
                   name="totalAmount"

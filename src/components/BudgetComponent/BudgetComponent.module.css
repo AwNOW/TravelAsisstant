@@ -37,6 +37,11 @@
   opacity: 1;
 }
 
+.editionSection {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .btnEdit {
   align-items: center;
   background-color: #fff;
@@ -47,7 +52,6 @@
   display: flex;
   height: 20px;
   justify-content: center;
-  margin-top: 5px;
   padding: 12px 30px 12px 30px;
   right: 0;
   text-decoration: none;
@@ -57,15 +61,15 @@
 }
 
 .btnEdit:hover {
-  background-color: #f8f6f6;
-  color: #1ea585;
+  color: #f7f8f6;
+  background-color: #1ea585;
 }
 
 .mainLists {
   padding-top: 40px;
   width: 800px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .costsList {
@@ -77,7 +81,6 @@
 .categories {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   text-align: center;
 }
 
@@ -87,4 +90,116 @@
   justify-content: center;
   width: 200px;
   padding: 0;
+}
+
+.moneyRatio {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.titleBudgetCalculation {
+  padding: 10px;
+  margin-left: 15px;
+  font-size: 14px;
+  color: grey;
+}
+
+.totalTripCosts {
+  font-size: 25px;
+  margin-left: 45px;
+  font-weight: 600;
+}
+
+.totalBudget {
+  padding-top: 12px;
+  margin-left: 45px;
+  font-size: 14px;
+  color: grey;
+}
+
+.mainBar {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  height: 35px;
+  background-color: rgb(228, 228, 228);
+  border-radius: 20px;
+}
+
+.smallBar {
+  height: 35px;
+  background-color: #1ea585;
+  transition: width 0.5s;
+  border-radius: 20px;
+}
+
+.red {
+  background-color: rgb(130, 8, 8);
+}
+
+.costList {
+  padding: 0px;
+}
+
+.errorMsg {
+  align-content: center;
+  font-size: 12px;
+  color: white;
+  height: 35px;
+  padding-left: 10px;
+}
+
+.costListItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 450px;
+  padding: 20px;
+  margin-top: 10px;
+  border-radius: 13px;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+.costComponentUpper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.costComponentLower {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.costDescription {
+  margin-left: 5px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.costCategory {
+  margin-left: 5px;
+  font-size: 14px;
+  color: grey;
+}
+
+.btnCat{
+  width: 200px;
+  height: 50px;
+  margin-bottom: 30px;
+  background-color: #1ea585;
+  color: #fff;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.btnCat:hover{
+  background-color: #198169;
 }

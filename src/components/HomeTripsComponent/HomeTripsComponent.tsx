@@ -108,6 +108,7 @@ function HomeTripsComponent() {
         startDate: storedStartDate,
         endDate: storedEndDate,
         tripLocation: searchCountry,
+        budget: 0,
       })
     );
 
@@ -236,6 +237,7 @@ function HomeTripsComponent() {
         startDate={editedTrip?.startDate}
         endDate={editedTrip?.endDate}
         tripLocation={editedTrip?.tripLocation}
+        budget={editedTrip?.budget}
       />
     </div>
   );

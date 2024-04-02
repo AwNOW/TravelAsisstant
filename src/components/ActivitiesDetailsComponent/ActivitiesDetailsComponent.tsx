@@ -14,23 +14,8 @@ interface ActivitiesDetailsComponentProps {
   tripId: string;
 }
 
-function ActivitiesDetailsComponent({
-  startTripDate,
-  endTripDate,
-  tripId,
-}: ActivitiesDetailsComponentProps) {
-  const activitiesByTripId = useSelector<StoreState, Activity[]>((state) =>
-    getActivitiesByTripId(state, tripId)
-  );
-
-  // trip edition
-  //modal
-  const [editedActivity, setEditedActivity] = useState<Activity | undefined>(
-    undefined
-  );
-
   // Helper function to format time
-  const formatTime = (dateString: number): string => {
+ export const formatTime = (dateString: number): string => {
     const activityDateTime = new Date(dateString);
     return activityDateTime.toLocaleTimeString([], {
       hour: "2-digit",
@@ -38,7 +23,7 @@ function ActivitiesDetailsComponent({
     });
   };
 
-  const printAllDays = (startDay: number, endDay: number) => {
+  export const printAllDays = (startDay: number, endDay: number) => {
     const startDate = new Date(startDay);
     const endDate = new Date(endDay);
     const currentDay = new Date(startDate);
@@ -50,6 +35,23 @@ function ActivitiesDetailsComponent({
     }
     return datesArr;
   };
+
+function ActivitiesDetailsComponent({
+  startTripDate,
+  endTripDate,
+  tripId,
+}: ActivitiesDetailsComponentProps) {
+
+  const activitiesByTripId = useSelector<StoreState, Activity[]>((state) =>
+    getActivitiesByTripId(state, tripId)
+  );
+
+  // trip edition
+  //modal
+  const [editedActivity, setEditedActivity] = useState<Activity | undefined>(
+    undefined
+  );
+
 
   const allDaysDateArr: string[] = printAllDays(startTripDate, endTripDate);
 

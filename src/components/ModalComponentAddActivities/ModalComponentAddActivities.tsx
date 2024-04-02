@@ -84,23 +84,27 @@ function ModalComponent({
           return !isOverlapping(startActivityDate, endActivityDate);
         }
       ),
-    endActivityDate: Yup.date()
-      .required("Start date is required")
-      .min(Yup.ref("startActivityDate"), "Incorrect date")
-      .max(
-        new Date(endTripDate + 86400000),
-        "Chosen date cannot be after the end of the trip."
-      )
-      .test(
-        "date-range",
-        "Activity date range overlaps with existing activities",
-        function (endActivityDate: Date) {
-          const startActivityDate = this.resolve(
-            Yup.ref("startActivityDate")
-          ) as Date;
-          return !isOverlapping(startActivityDate, endActivityDate);
-        }
-      ),
+      endActivityDate: Yup.date().when("endDateIsRequired", {
+        is: true,
+        then: () => Yup.date()
+          .required("End date is required")
+          .min(Yup.ref("startActivityDate"), "End date must be after start date")
+          .max(
+            new Date(endTripDate + 86400000),
+            "End date cannot be after the end of the trip."
+          )
+          .typeError("Please provide a valid date")
+          .test(
+            "date-range",
+            "Activity date range overlaps with existing activities",
+            function (endActivityDate: Date) {
+              const startActivityDate = this.resolve(
+                Yup.ref("startActivityDate")
+              ) as Date;
+              return !isOverlapping(startActivityDate, endActivityDate);;
+            }
+          ),
+      }),
   });
 
   const activitiesByTripId = useSelector<StoreState, Activity[]>((state) =>

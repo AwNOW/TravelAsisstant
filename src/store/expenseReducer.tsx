@@ -3,6 +3,7 @@ import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 export interface Expense {
   id: string;
   tripId: string;
+  expenseCost: number;
   description: string;
   date: number;
   isPaid: boolean;

@@ -8,15 +8,12 @@ import {
   notificationTripEdited,
   notificationTripEditionNoChanges,
 } from "../../notifications";
-import { getActivitiesByTripId } from "../../store/selectors";
+import { getActivitiesByTripId, useAppSelector, tripsSelectors } from "../../store/selectors";
 import { Activity } from "../../store/activityReducer";
 import { removeActivitiesAction } from "../../store/activityReducer";
 
 import { StoreState } from "../../store/selectors";
-import {
-  editTripAction,
-  removeTripAction,
-} from "../../store/tripReducer";
+import { editTripAction, removeTripAction } from "../../store/tripReducer";
 
 import {
   Formik,
@@ -70,6 +67,7 @@ interface ModalProps {
   startDate: number | undefined;
   endDate: number | undefined;
   tripLocation: string | undefined;
+  budget: number | undefined;
 }
 
 interface UpdateTripForm {
@@ -85,6 +83,10 @@ function ModalComponent({
   endDate,
   tripLocation,
 }: ModalProps) {
+
+  const selectedTrip = useAppSelector((state) =>
+  tripsSelectors.selectById(state, tripId!)
+);
   const activitiesByTripId = useSelector<StoreState, Activity[]>((state) =>
     getActivitiesByTripId(state, tripId!)
   );
@@ -151,29 +153,24 @@ function ModalComponent({
     formikHelpers: FormikHelpers<UpdateTripForm>
   ) => void | Promise<any> = (values, { setSubmitting }) => {
     if (
-      tripId !== undefined &&
-      startDate !== undefined &&
-      endDate !== undefined &&
-      tripLocation !== undefined
+      values.country === tripLocation &&
+      values.tripTimeFrames[0].getTime() === startDate &&
+      values.tripTimeFrames[1].getTime() === endDate
     ) {
-      if (
-        values.country === tripLocation &&
-        values.tripTimeFrames[0].getTime() === startDate &&
-        values.tripTimeFrames[1].getTime() === endDate
-      ) {
-        notificationTripEditionNoChanges();
-      } else {
-        notificationTripEdited();
-      }
-      dispatch(
-        editTripAction({
-          id: tripId,
-          startDate: values.tripTimeFrames[0].getTime(),
-          endDate: values.tripTimeFrames[1].getTime(),
-          tripLocation: values.country,
-        })
-      );
+      notificationTripEditionNoChanges();
+    } else {
+      notificationTripEdited();
     }
+    dispatch(
+      editTripAction({
+        ...selectedTrip,
+        startDate: values.tripTimeFrames[0].getTime(),
+        endDate: values.tripTimeFrames[1].getTime(),
+        tripLocation: values.country,
+
+      })
+    );
+
     setSubmitting(false);
     onClose(); // Close the modal after dispatching action
   };

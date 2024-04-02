@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Field, ErrorMessage, FormikHelpers, Form } from "formik";
+import { addExpenseAction } from "../../store/expenseReducer";
 import * as Yup from "yup";
 
 const customStyles = {
@@ -12,7 +13,7 @@ const customStyles = {
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    height: "850px",
+    height: "500px",
     maxWidth: "450px",
     width: "100%",
     top: "50%",
@@ -23,6 +24,12 @@ const customStyles = {
     transform: "translate(-50%, -50%)",
   },
 } as const;
+//object is treated as a constant, where neither its properties nor their
+//values can be reassigned. This is crucial in maintaining the immutability of the
+//customStyles object, preventing unintended modifications to its properties or values
+//during runtime, thus enhancing code predictability and stability.
+
+
 
 // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 Modal.setAppElement("#root");
@@ -34,6 +41,7 @@ interface ModalProps {
 }
 
 interface AddExpenseForm {
+  expenseCost: number;
   description: string;
   category: string;
   date: Date;
@@ -48,18 +56,17 @@ function ModalComponent({ isOpen, onClose, tripId }: ModalProps) {
     formikHelpers: FormikHelpers<AddExpenseForm>
   ) => void | Promise<any> = (values, { setSubmitting }) => {
     const newExpenseId = uuidv4();
-    // dispatch(
-    //   addActivityAction({
-    //     id: newExpenseId,
-    //     tripId: tripId,
-    //     startActivityDate: Number(values.startActivityDate),
-    //     endActivityDate: Number(values.endActivityDate),
-    //     city: values.city,
-    //     description: values.description,
-    //     isChecked: false,
-    //     group: values.group,
-    //   })
-    // );
+    dispatch(
+      addExpenseAction({
+        id: newExpenseId,
+        tripId: tripId,
+        expenseCost: values.expenseCost,
+        date:  values.date.getTime(),
+        isPaid: values.isPaid,
+        description: values.description,
+        category: values.category,
+      })
+    );
 
     setSubmitting(false);
     onClose(); // Close the modal after dispatching action
@@ -74,10 +81,11 @@ function ModalComponent({ isOpen, onClose, tripId }: ModalProps) {
         }}
         style={customStyles}
       >
-        <h3 className={S.title}>Add Ativity</h3>
+        <h1 className={S.title}>New Expense</h1>
 
         <Formik
           initialValues={{
+            expenseCost: 0,
             description: "",
             category: "",
             date: new Date(),
@@ -99,9 +107,15 @@ function ModalComponent({ isOpen, onClose, tripId }: ModalProps) {
           }) => (
             <Form onSubmit={handleSubmit} className={S.form}>
               <div className={S.inputBox}>
+                <Field type="number" className={S.input} name="expenseCost" />
+                {/* <ErrorMessage name="city" component="div" className={S.error} /> */}
+              </div>
+
+              <div className={S.inputBox}>
                 <label className={S.label} htmlFor="city">
                   DESCRIPTION
                 </label>
+
                 <Field
                   type="text"
                   className={S.input}
@@ -116,11 +130,11 @@ function ModalComponent({ isOpen, onClose, tripId }: ModalProps) {
                   CATEGORY
                 </label>
                 <Field name="category" as="select" className={S.selectInput}>
-                  <option value="documents">Essential Documents</option>
-                  <option value="food">Eat & Drink</option>
-                  <option value="activities">See & Do</option>
-                  <option value="transport">Transport</option>
-                  <option value="accommodation">Accommodation</option>
+                  <option value="Documents">Essential Documents</option>
+                  <option value="Food">Eat & Drink</option>
+                  <option value="Activities">See & Do</option>
+                  <option value="Transport">Transport</option>
+                  <option value="Accommodation">Accommodation</option>
                   <option value="" disabled hidden>
                     Select an Option{" "}
                   </option>
@@ -133,35 +147,26 @@ function ModalComponent({ isOpen, onClose, tripId }: ModalProps) {
                 /> */}
               </div>
 
-              {/* <div className={S.inputBox}>
-                <label className={S.labelDate}>START</label>
+              <div className={S.inputBox}>
+                <label className={S.label}>Select Date</label>
                 <Field
                   as={DatePicker}
-                  name="startActivityDate"
+                  name="date"
                   type="date"
                   className={S.input}
-                  selected={values.startActivityDate}
-                  value={values.startActivityDate}
-                  onChange={(date: any) => {
-                    setFieldTouched("startActivityDate", true);
+                  showIcon
+                  selected={values.date}
+                  onChange={(date: Date) => {
+                    console.log(date);
+                    setFieldTouched("date", true);
                     setValues((values) => ({
                       ...values,
-                      startActivityDate: date,
-                      endActivityDate: date,
+                      date: date,
                     }));
                   }}
-                  showTimeSelect
-                  timeFormat="p"
-                  timeIntervals={15}
-                  dateFormat="Pp"
                 />
-                <ErrorMessage
-                  name="startActivityDate"
-                  component="div"
-                  className={S.error}
-                />
-              </div> */}
-
+                <ErrorMessage name="date" component="div" className={S.error} />
+              </div>
               <button type="submit" className={S.btnAddNew}>
                 ADD
               </button>
